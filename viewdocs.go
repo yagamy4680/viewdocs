@@ -30,7 +30,11 @@ func (cv *CacheValue) Size() int {
 
 func parseRequest(r *http.Request) (user, repo, ref, doc string) {
 	hostname := strings.Split(r.Host, ".")
-	user = hostname[0]
+
+	user = os.Getenv("GITHUB_USERNAME")
+	if user == "" {
+		user = hostname[0]
+	}
 	path := strings.Split(r.RequestURI, "/")
 
 	repoAndRef := strings.Split(path[1], "~")
