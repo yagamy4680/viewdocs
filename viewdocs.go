@@ -122,7 +122,7 @@ func fetchAndRenderDoc(user, repo, ref, doc string) (string, error) {
 	if ok, _ := mdExts[path.Ext(doc)]; !ok {
 		doc += ".md"
 	}
-	resp, err := http.Get("https://raw.github.com/" + user + "/" + repo + "/" + ref + "/docs/" + doc)
+	resp, err := http.Get("https://" + os.Getenv("ACCESS_TOKEN") + "@raw.github.com/" + user + "/" + repo + "/" + ref + "/docs/" + doc)
 	if err != nil {
 		return "", err
 	}
